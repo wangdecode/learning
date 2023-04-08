@@ -1,0 +1,18 @@
+vnr
+https://github.com/tesseract-ocr
+
+图像处理
+http://opencv.org
+http://www.zealpixel.com
+http://www.scriptol.com/programming/graphic-algorithms.php
+
+图像放大
+waifu2x
+http://waifu2x.udp.jp
+https://github.com/lltcggie/waifu2x-caffe
+wiki	http://en.wikipedia.org/wiki/Image_scaling
+
+分词 cppjieba
+文本相似 simhash
+
+https://blog.csdn.net/luozhuang/article/details/6167799
