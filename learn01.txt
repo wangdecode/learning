@@ -1,6 +1,12 @@
 vnr
 https://github.com/tesseract-ocr
 
+OCR
+https://github.com/PaddlePaddle/PaddleOCR
+https://github.com/zh-h/Windows.Media.Ocr.Cli
+https://github.com/DayBreak-u/chineseocr_lite
+MS modi ocr
+
 图像处理
 http://opencv.org
 http://www.zealpixel.com
@@ -12,7 +18,18 @@ http://waifu2x.udp.jp
 https://github.com/lltcggie/waifu2x-caffe
 wiki	http://en.wikipedia.org/wiki/Image_scaling
 
-分词 cppjieba
+分词
+结巴分词 https://github.com/yanyiwu/cppjieba
+中科院计算所NLPIR http://ictclas.nlpir.org/nlpir/
+ansj分词器 https://github.com/NLPchina/ansj_seg
+哈工大的LTP https://github.com/HIT-SCIR/ltp
+清华大学THULAC https://github.com/thunlp/THULAC
+斯坦福分词器 https://nlp.stanford.edu/software/segmenter.shtml
+Hanlp分词器 https://github.com/hankcs/HanLP
+KCWS分词器(字嵌入+Bi-LSTM+CRF) https://github.com/koth/kcws
+ZPar https://github.com/frcchang/zpar/releases
+IKAnalyzer https://github.com/wks/ik-analyzer
+
 文本相似 simhash
 
 https://blog.csdn.net/luozhuang/article/details/6167799
