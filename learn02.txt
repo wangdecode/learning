@@ -1,0 +1,7 @@
+备忘
+语音识别 faster whisper加载v3模型
+对于识别歌词，vad里的概率阈值设为0.1才能听出来歌词，默认是0.5
+翻译 sakura模型
+Luna翻译器：https://github.com/HIllya51/LunaTranslator
+
+分离背景音 uvr5
