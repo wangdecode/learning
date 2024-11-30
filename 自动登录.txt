@@ -1,0 +1,6 @@
+
+cd ~/.ssh
+
+vi ~/.ssh/authorized_keys
+# Ìí¼Ó ssh-rsa key
+

@@ -1,0 +1,80 @@
+﻿系统升级方法
+参考：https://www.zhihu.com/people/mai-ke-liu-56
+
+## 端口转发
+# 127.0.0.1	7777	[留空]	22
+
+加载镜像并挂载
+mount /dev/cdrom /mnt
+
+查看源配置
+cat /etc/yum.repos.d/openEuler.repo
+cp /etc/yum.repos.d/openEuler.repo /etc/yum.repos.d/openEuler.repo.bak
+vi /etc/yum.repos.d/openEuler.repo
+－－－－－－－－－－－－－－－－－－－－－－
+[base-local]
+name=iso
+baseurl=file:///mnt/
+enabled=1
+gpgcheck=0
+－－－－－－－－－－－－－－－－－－－－－－
+
+升级openEuler源
+dnf clean all
+
+更新系统，releasever改成对应的版本，如'22.03LTS_SP4'
+dnf -y --releasever='22.03LTS_SP4' --allowerasing --setopt=deltarpm=false distro-sync --nogpgcheck
+
+# 如果库文件冲突报错，卸载对应版本库
+# 如 ukui-power-manager-common-2.0.3-1.oe1.x86_64
+# rpm -e --nodeps ukui-power-manager-common-2.0.3-1.oe1.x86_64
+# 重新执行上一步更新系统命令
+
+# filesystem 升级方法
+cp /mnt/Packages/filesystem*.rpm /tmp
+umount /mnt
+rpm -U /tmp/filesystem*.rpm
+rm /tmp/filesystem*.rpm
+mount /dev/cdrom /mnt
+
+重建rpm数据库
+rpm --rebuilddb
+
+重装缺失组件
+dnf group install "Minimal Install" -y
+
+重建引导
+查看分区表类型
+fdisk -l
+
+GPT分区表 (磁盘标签类型：gpt)
+export grubcfg=$(find /boot/ -name openEuler)
+grub2-mkconfig -o $grubcfg/grub.cfg
+
+添加UEFI启动项
+注意/dev/sda为efi分区所在磁盘，需根据实际情况自行选择磁盘路径，-p后面是分区位置（默认为1）,efi分区为/dev/sda值就是1,efi分区为/dev/sdb值就是2
+efibootmgr -c -w -L "openeuler" -d /dev/sda -p 1 -l \\EFI\\openEuler\\shimx64.efi
+
+MBR分区表 (磁盘标签类型：dos)
+注意/dev/sda需根据实际情况自行选择磁盘路径
+grub2-mkconfig -o /boot/grub2/grub.cfg
+grub2-install /dev/sda
+
+重启
+reboot
+
+查看当前内核
+uname -a
+
+查询安装内核
+dnf list installed | grep kernel
+
+移除多余内核
+dnf remove kernel-4.1* -y
+
+
+
+
+
+
+

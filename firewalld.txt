@@ -1,0 +1,57 @@
+﻿firewalld 常用命令
+
+# 查看 firewalld 是否启动
+systemctl status firewalld
+# firewall-cmd --state
+
+# 查看 iptables 是否关闭
+systemctl status iptables
+
+# 查看预定义区域
+firewall-cmd --get-zones
+
+# 查看预定义服务
+firewall-cmd --get-services
+
+# 查看默认区域
+firewall-cmd --get-default-zone
+
+# 输出默认区域的所有规则
+firewall-cmd --list-all
+
+# 输出默认区域的所有规则
+firewall-cmd --list-services
+
+# 默认区域添加服务
+# firewall-cmd --add-service=http
+
+# 默认区域删除服务
+# firewall-cmd --remove-service=http
+
+# 重新加载永久配置
+firewall-cmd --reload
+
+# 将当前配置保存为永久配置
+firewall-cmd --runtime-to-permanent
+
+# 添加端口，永久的话最后加上“ --permanent”
+firewall-cmd --zone=public --add-port=80/tcp
+
+# 添加规则
+firewall-cmd --zone=public --add-rich-rule='rule family="ipv4" source address="192.168.1.2" port port="123" protocol="tcp" accept'
+# 删除规则
+# firewall-cmd --zone=public --remove-rich-rule='rule family="ipv4" source address="192.168.1.2" port port="123" protocol="tcp" accept'
+
+# 禁止22端口
+# firewall-cmd --zone=public --add-rich-rule='rule family="ipv4" port port="22" protocol="tcp" drop'
+
+# 临时允许ping，单位：秒(s)、分(m)或小时(h)
+firewalld -cmd --add-rich-rule='rule family="ipv4" protocol value="icmp" source address="192.168.1.2/24" accept' --timeout=1m
+
+## 直接模式，查看规则
+firewall-cmd --direct --get-all-rules
+
+## 直接模式，添加规则，INPUT后数字越小，优先级越高
+firewall-cmd --direct --add-rule ipv4 filter INPUT 1 -p tcp --dport 80 -s 192.168.1.2 -j ACCEPT
+
+
